@@ -81,8 +81,8 @@ export default function EmployeeDashboard() {
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    if (status === "authenticated" && session?.user?.role !== "EMPLOYEE") {
-      router.push("/dashboard/admin")
+    if (status === "authenticated" && session?.user?.role && session.user.role !== "EMPLOYEE") {
+      router.replace("/dashboard/admin")
     }
   }, [status, router, session?.user?.role])
 

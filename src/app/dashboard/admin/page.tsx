@@ -158,8 +158,8 @@ function AdminDashboardContent() {
   const [activeTab, setActiveTab] = useState<"overview" | "employees" | "requests" | "analytics">("overview")
 
   useEffect(() => {
-    if (status === "authenticated" && session?.user?.role !== "ADMIN") {
-      router.push("/dashboard/employee")
+    if (status === "authenticated" && session?.user?.role && session.user.role !== "ADMIN") {
+      router.replace("/dashboard/employee")
     }
   }, [status, router, session?.user?.role])
 
