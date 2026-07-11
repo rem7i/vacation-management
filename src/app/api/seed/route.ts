@@ -1,8 +1,13 @@
 import { prisma } from "@/lib/prisma"
-import { NextResponse } from "next/server"
+import { NextRequest, NextResponse } from "next/server"
 import bcrypt from "bcryptjs"
 
-export async function GET() {
+export async function GET(request: NextRequest) {
+  const key = request.nextUrl.searchParams.get("key")
+  if (key !== "vacation-seed-2024") {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+  }
+
   try {
     // Create vacation types
     const vacationTypes = [
